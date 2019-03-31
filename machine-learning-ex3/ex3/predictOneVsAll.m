@@ -30,9 +30,13 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+predictions = sigmoid(all_theta*X'); % each column contains the pred for a given training ex
 
+best_probs = max(predictions);
 
-
+for i = 1:m
+  p(i) = find(predictions(:, i) == best_probs(i))(1);
+endfor
 
 
 

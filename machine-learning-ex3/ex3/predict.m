@@ -8,7 +8,7 @@ m = size(X, 1);
 num_labels = size(Theta2, 1);
 
 % You need to return the following variables correctly 
-p = zeros(size(X, 1), 1);
+p = ones(size(X, 1), 1);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Complete the following code to make predictions using
@@ -21,14 +21,24 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+X = [ones(m, 1) X];
+predictions_l2 = sigmoid(Theta1*X'); % each column contains the pred for a given training ex
 
+%best_probs = max(predictions_l2);
 
+%for i = 1:m
+%  p(i) = find(predictions_l2(:, i) == best_probs(i))(1);
+%endfor
 
+%%%%%%%%
+predictions_l2 = [ones(1, m); predictions_l2];
+predictions_l3 = sigmoid(Theta2*predictions_l2);
 
+best_probs = max(predictions_l3);
 
-
-
-
+for i = 1:m
+  p(i) = find(predictions_l3(:, i) == best_probs(i))(1);
+endfor
 % =========================================================================
 
 
